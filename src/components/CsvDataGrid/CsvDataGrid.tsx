@@ -86,7 +86,10 @@ const CsvDataGrid: React.FC<Props> = ({ searchQuery }) => {
 	];
 
 	return (
-		<div style={{ height: 400, width: "100%", textAlign: "center" }}>
+		<div
+			className="CsvDataGrid"
+			style={{ height: 400, width: "100%", textAlign: "center" }}
+		>
 			<div
 				style={{ display: "flex", height: "100%", justifyContent: "center" }}
 			>
