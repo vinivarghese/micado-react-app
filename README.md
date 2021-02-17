@@ -1,46 +1,24 @@
-# Getting Started with Create React App
+# Getting Started with Micado React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was developed using React, Typescript, and CSS (https://github.com/vinivarghese/micado-react-app).\
+Material-UI, a React UI framework was used to create the React components.
 
-## Available Scripts
+## Steps to launch the application
 
-In the project directory, you can run:
+1. Open your terminal and go the your project folder.\
+2. Run the command "docker-compose up".\
+3. You will observe an url against Local (http://localhost:3000).\
+4. Go to the url.
 
-### `yarn start`
+## About the application
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This application reads a local CSV input file and displays the data on the web application. Users can filter the results in the datagrid using a searchbox present at the top of the application. Filtering is only allowed on string columns.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Application U
 
-### `yarn test`
+<img width="1440" alt="Micado React App" src="https://user-images.githubusercontent.com/41140089/108282933-52795700-71e7-11eb-9da7-77b63910ac16.png">
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+### Application Demo
+https://user-images.githubusercontent.com/41140089/108283124-9b311000-71e7-11eb-9d6f-aed5dcaaaf1c.mov
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
