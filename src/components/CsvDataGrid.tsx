@@ -24,6 +24,7 @@ const CsvDataGrid: React.FC<Props> = ({ searchQuery }) => {
 			const filteredCsvData: CsvData[] = [];
 
 			if (searchQuery) {
+				// eslint-disable-next-line
 				const filteredResult = data.map((item: any) => {
 					if (item.species.startsWith(searchQuery)) {
 						filteredCsvData.push(item);
