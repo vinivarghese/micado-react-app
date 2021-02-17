@@ -6,6 +6,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import SearchIcon from "@material-ui/icons/Search";
 import { SearchQuery } from "../../common/interfaces/SearchQuery";
 import "./SearchBox.css";
+import Tooltip from "@material-ui/core/Tooltip";
 
 interface Props {
 	SetSearchQuery: (searchQuery: SearchQuery) => void;
@@ -22,7 +23,8 @@ const useStyles = makeStyles((theme: Theme) =>
 		button: {
 			margin: theme.spacing(1),
 			backgroundColor: "#66d7d1",
-			padding: "20px",
+			padding: "10px",
+			size: "medium",
 		},
 	})
 );
@@ -67,13 +69,18 @@ const SearchBox: React.FC<Props> = ({ SetSearchQuery }) => {
 			/>
 
 			<form className={classes.root} noValidate autoComplete="off">
-				<TextField
-					id="outlined-basic"
-					label="Enter search string"
-					variant="outlined"
-					onChange={onTextChangeEvent}
-					value={searchString}
-				/>
+				<Tooltip
+					title="Search is available only on string columns"
+					placement="right"
+				>
+					<TextField
+						id="outlined-basic"
+						label="Enter search string"
+						variant="outlined"
+						onChange={onTextChangeEvent}
+						value={searchString}
+					/>
+				</Tooltip>
 			</form>
 
 			<Button
