@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		button: {
 			margin: theme.spacing(1),
+			backgroundColor: "#66d7d1",
+			padding: "20px",
 		},
 	})
 );

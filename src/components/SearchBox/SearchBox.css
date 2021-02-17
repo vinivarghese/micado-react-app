@@ -1,8 +1,7 @@
 .SearchBox {
-	background-image: url("../../Images/background.jpg");
-	background-size: contain;
+	background-color: #c7d6d5;
 }
 
 .Micado_Logo {
-	margin: 2%;
+	padding: 2%;
 }
