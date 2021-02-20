@@ -1,19 +1,10 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import { CsvData } from "../../common/interfaces/CsvData";
 
-interface Props {}
-
-interface CsvData {
-	class: string;
-	category: string;
-	indicator_name: string;
-	series_name: string;
-	sub_series_name: string;
-	parameter: string;
-	value: number;
-	units: string;
-	date_last_updated: string;
+interface Props {
+	SetCsvDataResult: (csvData: CsvData[]) => void;
 }
 
 const useStyles = makeStyles({
@@ -23,14 +14,12 @@ const useStyles = makeStyles({
 	},
 });
 
-const CsvFileUploader: React.FC<Props> = (props: Props) => {
-	const [csvData, setCsvData] = useState<CsvData[]>([]);
-
+const CsvFileUploader: React.FC<Props> = ({ SetCsvDataResult }) => {
 	const classes = useStyles();
 
 	let fileReader: FileReader;
 
-	const handleFileRead = useCallback((e: ProgressEvent) => {
+	const handleFileRead = (e: ProgressEvent) => {
 		if (fileReader.result) {
 			const content = fileReader.result.toString();
 			const arr = content.split("\n");
@@ -44,13 +33,14 @@ const CsvFileUploader: React.FC<Props> = (props: Props) => {
 				}
 				jsonObj.push(obj);
 			}
-			console.log(jsonObj);
-			setCsvData(jsonObj);
+			// setCsvData(jsonObj);
+			SetCsvDataResult(jsonObj);
 		}
-	}, []);
+	};
 
 	const uploadCsvFile = useCallback((event) => {
 		const file = event.target.files[0];
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		fileReader = new FileReader();
 		fileReader.onloadend = handleFileRead;
 		fileReader.readAsText(file);
