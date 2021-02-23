@@ -5,7 +5,17 @@ export interface CsvData {
 	series_name: string;
 	sub_series_name: string;
 	parameter: string;
-	value: number;
+	value: string;
 	units: string;
 	date_last_updated: string;
+}
+
+export interface CsvDataExtended extends CsvData {
+	intValue: number;
+	year?: number;
+	month?: number;
+}
+
+export interface CsvDataExtendedWithRowIndex extends CsvDataExtended {
+	index: number;
 }

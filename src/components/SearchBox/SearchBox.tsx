@@ -7,6 +7,14 @@ import SearchIcon from "@material-ui/icons/Search";
 import { SearchQuery } from "../../common/interfaces/SearchQuery";
 import "./SearchBox.css";
 import Tooltip from "@material-ui/core/Tooltip";
+import Box from "@material-ui/core/Box";
+// import "date-fns";
+// import DateFnsUtils from "@date-io/date-fns";
+// import {
+// 	MuiPickersUtilsProvider,
+// 	KeyboardDatePicker,
+// } from "@material-ui/pickers";
+// import Grid from "@material-ui/core/Grid";
 
 interface Props {
 	SetSearchQuery: (searchQuery: SearchQuery) => void;
@@ -33,6 +41,8 @@ const SearchBox: React.FC<Props> = ({ SetSearchQuery }) => {
 	const classes = useStyles();
 
 	const [searchString, setSearchString] = useState<string>("");
+	const [startDate, setStartDate] = useState();
+	const [endDate, setEndDate] = useState();
 
 	const onTextChangeEvent = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,48 +70,81 @@ const SearchBox: React.FC<Props> = ({ SetSearchQuery }) => {
 		SetSearchQuery(searchStringQuery);
 	}, [SetSearchQuery, searchString]);
 
+	const handleStartDateChange = useCallback((date) => {
+		setStartDate(date);
+	}, []);
+
+	const handleEndDateChange = useCallback((date) => {
+		setEndDate(date);
+	}, []);
+
 	return (
 		<div className="SearchBox">
-			<img
-				className="Micado_Logo"
-				src="https://static.wixstatic.com/media/e96df6_a23e1e0949bc4b268a3823271aadb4eb~mv2.png/v1/fill/w_460,h_98,al_c,q_85,usm_0.66_1.00_0.01/Micado%20logo_1200%20dpi.webp"
-				alt="Micado Logo"
-			/>
+			<Box>
+				<form className={classes.root} noValidate autoComplete="off">
+					<Tooltip
+						title="Search is available only on sub series name"
+						placement="right"
+					>
+						<TextField
+							id="outlined-basic"
+							label="Enter sub series name"
+							variant="outlined"
+							onChange={onTextChangeEvent}
+							value={searchString}
+						/>
+					</Tooltip>
 
-			<form className={classes.root} noValidate autoComplete="off">
-				<Tooltip
-					title="Search is available only on string columns"
-					placement="right"
+					{/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
+					<Grid container justify="space-around">
+						<KeyboardDatePicker
+							disableToolbar
+							variant="inline"
+							format="MM/dd/yyyy"
+							margin="normal"
+							id="date-picker-inline"
+							label="Date picker inline"
+							value={startDate}
+							onChange={handleStartDateChange}
+							KeyboardButtonProps={{
+								"aria-label": "change date",
+							}}
+						/>
+						<KeyboardDatePicker
+							margin="normal"
+							id="date-picker-dialog"
+							label="Date picker dialog"
+							format="MM/dd/yyyy"
+							value={endDate}
+							onChange={handleEndDateChange}
+							KeyboardButtonProps={{
+								"aria-label": "change date",
+							}}
+						/>
+					</Grid>
+				</MuiPickersUtilsProvider> */}
+				</form>
+
+				<Button
+					variant="contained"
+					color="primary"
+					className={classes.button}
+					endIcon={<SearchIcon />}
+					onClick={onSearchStringClickEvent}
 				>
-					<TextField
-						id="outlined-basic"
-						label="Enter search string"
-						variant="outlined"
-						onChange={onTextChangeEvent}
-						value={searchString}
-					/>
-				</Tooltip>
-			</form>
+					Search
+				</Button>
 
-			<Button
-				variant="contained"
-				color="primary"
-				className={classes.button}
-				endIcon={<SearchIcon />}
-				onClick={onSearchStringClickEvent}
-			>
-				Search
-			</Button>
-
-			<Button
-				variant="contained"
-				color="primary"
-				className={classes.button}
-				endIcon={<DeleteIcon />}
-				onClick={onClearSearchClickEvent}
-			>
-				Clear Search
-			</Button>
+				<Button
+					variant="contained"
+					color="primary"
+					className={classes.button}
+					endIcon={<DeleteIcon />}
+					onClick={onClearSearchClickEvent}
+				>
+					Clear Search
+				</Button>
+			</Box>
 		</div>
 	);
 };

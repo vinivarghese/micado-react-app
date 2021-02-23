@@ -11,6 +11,10 @@ const useStyles = makeStyles({
 	root: {
 		width: "100%",
 		maxWidth: 500,
+		margin: "auto",
+		justifyContent: "center",
+		paddingTop: "10%",
+		paddingBottom: "20%",
 	},
 });
 
@@ -33,7 +37,6 @@ const CsvFileUploader: React.FC<Props> = ({ SetCsvDataResult }) => {
 				}
 				jsonObj.push(obj);
 			}
-			// setCsvData(jsonObj);
 			SetCsvDataResult(jsonObj);
 		}
 	};
@@ -48,15 +51,12 @@ const CsvFileUploader: React.FC<Props> = ({ SetCsvDataResult }) => {
 
 	return (
 		<div className={classes.root}>
-			<Typography variant="h6" display="block" gutterBottom>
-				Upload CSV input file
+			<Typography variant="h3" display="block" gutterBottom>
+				Please upload your CSV input file
 			</Typography>
-			<input
-				className="csv-input"
-				type="file"
-				accept=".csv"
-				onChange={uploadCsvFile}
-			/>
+			<div className="csv-input">
+				<input type="file" accept=".csv" onChange={uploadCsvFile} />
+			</div>
 			<p />
 		</div>
 	);
