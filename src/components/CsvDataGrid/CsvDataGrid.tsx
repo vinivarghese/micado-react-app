@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-// import { csv } from "d3";
 import { DataGrid, Columns } from "@material-ui/data-grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { CsvData } from "../../common/interfaces/CsvData";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import "./CsvDataGrid.css";
+import { RemoveNullRowsFromCsvData } from "../../utils/HelperMethods";
 
 interface Props {
 	searchQuery: string;
@@ -29,13 +32,17 @@ const CsvDataGrid: React.FC<Props> = ({ searchQuery, csvResult }) => {
 
 	useEffect(() => {
 		setIsLoading(true);
-		let resultSet = csvResult;
+		let resultSet = RemoveNullRowsFromCsvData(csvResult);
 		const filteredCsvData: CsvData[] = [];
 
 		if (searchQuery) {
 			// eslint-disable-next-line
 			const filteredResult = resultSet.map((item: any) => {
-				if (item.species.startsWith(searchQuery)) {
+				if (
+					item.sub_series_name
+						.toLowerCase()
+						.startsWith(searchQuery.toLowerCase())
+				) {
 					filteredCsvData.push(item);
 				}
 				return item;
@@ -121,24 +128,34 @@ const CsvDataGrid: React.FC<Props> = ({ searchQuery, csvResult }) => {
 	];
 
 	return (
-		<div>
-			{isLoading && (
-				<div className={classes.root}>
-					<LinearProgress color="primary" />
-				</div>
-			)}
-			<div
-				className="CsvDataGrid"
-				style={{ height: 400, width: "100%", textAlign: "center" }}
-			>
+		<div className="Data-Grid">
+			<Box borderBottom={1}>
+				{isLoading && (
+					<div className={classes.root}>
+						<LinearProgress color="primary" />
+					</div>
+				)}
+
+				<Typography variant="h5" display="block" gutterBottom>
+					Uploaded input data
+				</Typography>
 				<div
-					style={{ display: "flex", height: "100%", justifyContent: "center" }}
+					className="CsvDataGrid"
+					style={{ height: 400, width: "100%", textAlign: "center" }}
 				>
-					<div style={{ flexGrow: 1 }}>
-						<DataGrid rows={csvData} columns={columns} />
+					<div
+						style={{
+							display: "flex",
+							height: "100%",
+							justifyContent: "center",
+						}}
+					>
+						<div style={{ flexGrow: 1 }}>
+							<DataGrid rows={csvData} columns={columns} />
+						</div>
 					</div>
 				</div>
-			</div>
+			</Box>
 		</div>
 	);
 };
